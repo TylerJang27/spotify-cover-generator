@@ -1,4 +1,4 @@
-import { Playlist, PlaylistedTrack } from "@spotify/web-api-ts-sdk";
+import { Playlist, PlaylistedTrack, Track } from "@spotify/web-api-ts-sdk";
 import { getSdk } from "./common";
 import logger from "./logger";
 
@@ -34,7 +34,7 @@ export const findPlaylist = async (userId: string, playlistName: string) => {
 
 export const listTracks = async (
   playlist: Playlist,
-): Promise<PlaylistedTrack[]> => {
+): Promise<PlaylistedTrack<Track>[]> => {
   const sdk = getSdk();
   const tracks = [];
   let total = 0;

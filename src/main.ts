@@ -2,6 +2,7 @@ import { Command } from "commander";
 import "dotenv/config";
 import { findPlaylist, listTracks } from "./playlist";
 import logger from "./logger";
+import { generateCoverImage } from "./ai";
 
 const query = async (userId: string, playlistName: string) => {
   const playlist = await findPlaylist(userId, playlistName);
@@ -10,7 +11,9 @@ const query = async (userId: string, playlistName: string) => {
     `Retrieved ${tracks.length} tracks from playlist \`${playlist.name}\``,
   );
 
-  logger.info("tracks", tracks);
+  const image = await generateCoverImage(playlist, tracks);
+
+  logger.info("image result", image);
 };
 
 const main = () => {
